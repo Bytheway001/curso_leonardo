@@ -1,0 +1,25 @@
+{
+  "name": "curso_leonardo",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "Cambios respecto al curso de javascriptya",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon -q index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Bytheway001/curso_leonardo.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Bytheway001/curso_leonardo/issues"
+  },
+  "homepage": "https://github.com/Bytheway001/curso_leonardo#readme",
+  "dependencies": {
+    "ansi-colors-es6": "^5.0.0",
+    "nodemon": "^2.0.19"
+  }
+}
