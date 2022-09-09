@@ -1,12 +1,13 @@
 console.clear()
-import ejercicio1 from './ejercicios/ejercicio1.js'
-import ejercicio2 from './ejercicios/ejercicio2.js'
-import ansi from 'ansi-colors-es6';
-var tests = [
-    [[100, 20], 120],
-    [[1000], 1210]
-]
+if (!process.argv.slice(2)[0]) {
+    fail("No se ha indicado un ejercicio")
+    process.exit()
+}
 
+const nombre = process.argv.slice(2)[0]
+const { default: ejercicio } = await import(`./tests/${nombre}.js`)
+import ansi from 'ansi-colors-es6';
+console.log(ansi.bgGreen("Inicializando tests"))
 function fail(string) {
     console.log(ansi.red(string))
 }
@@ -17,22 +18,29 @@ function success(string) {
 function doTest(callback, args, expect) {
 
     let result = callback(...args)
-    if ( result == expect) {
-        success(`${callback.name} ha pasado el test con argumentos ${args}`)
+    if (result == expect) {
+        success(`${nombre} ha pasado el test con argumentos ${args}`)
+        return true
     }
     else {
-        fail(`Test de function ${callback.name} Fallido, se con parametros ${args}, se esperaba ${expect} y se obtuvo ${result}` )
+        fail(`Test de ${nombre} Fallido, se con parametros ${args}, se esperaba ${expect} y se obtuvo ${result}`)
+        return false
     }
 
 }
 
+let realizados = 0;
+let pasados = 0;
+let fallidos = 0;
 
-[ejercicio1,ejercicio2].forEach(ejercicio=>{
+ejercicio.tests.forEach(e => {
+    realizados++;
 
-    ejercicio.tests.forEach(e=>{
-       
-        doTest(ejercicio.script,...e)
-    })
+    if (doTest(ejercicio.script, ...e)) {
+        pasados++
+    }
+    else {
+        fallidos++
+    }
 })
-
-
+console.log(`Resultados del test:`, { realizados, pasados, fallidos })
