@@ -23,7 +23,7 @@ function doTest(callback, args, expect) {
         return true
     }
     else {
-        fail(`Test de ${nombre} Fallido, se con parametros ${args}, se esperaba ${expect} y se obtuvo ${result}`)
+        fail(`Test de ${nombre} Fallido con parametros ${args}, se esperaba ${expect} y se obtuvo ${result}`)
         return false
     }
 
